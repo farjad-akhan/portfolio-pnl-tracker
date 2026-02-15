@@ -125,6 +125,6 @@ src/
   routes.js
   portfolioEngine.js
 
-__tests__/
+tests/
   portfolioEngine.test.js
 ```
