@@ -4,6 +4,10 @@ class PortfolioEngine {
   constructor() {
     // { BTC: { quantity, avgPrice, realizedPnL } }
     this.positions = {};
+
+    // Store trades with id and timestamp
+    this.trades = [];
+    this.nextTradeId = 1;
   }
 
   addTrade(trade) {
@@ -33,6 +37,7 @@ class PortfolioEngine {
 
     const position = this.positions[symbol];
 
+    // Apply position logic (Average Cost Method)
     if (upperSide === "BUY") {
       const totalCost =
         position.avgPrice * position.quantity +
@@ -60,6 +65,20 @@ class PortfolioEngine {
         position.avgPrice = 0;
       }
     }
+
+    // Record trade with id and timestamp
+    const newTrade = {
+      id: this.nextTradeId++,
+      symbol,
+      side: upperSide,
+      price,
+      quantity,
+      timestamp: new Date()
+    };
+
+    this.trades.push(newTrade);
+
+    return newTrade;
   }
 
   getPortfolio() {
@@ -77,10 +96,7 @@ class PortfolioEngine {
 
       const marketPrice = latestPrices[symbol];
 
-      if (
-        marketPrice != null &&
-        position.quantity > 0
-      ) {
+      if (marketPrice != null && position.quantity > 0) {
         totalUnrealized +=
           (marketPrice - position.avgPrice) *
           position.quantity;
