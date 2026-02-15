@@ -1,34 +1,33 @@
-````markdown
 # Portfolio & PnL Tracker
 
 A simple backend service to track trades, compute portfolio positions, and calculate Realized and Unrealized PnL.
 
-This implementation uses the **Average Cost method** for cost basis calculation.
+This implementation uses the Average Cost method for cost basis calculation.
 
 ---
 
-##  Tech Stack
+## Tech Stack
 
-- Node.js
-- Express
-- Jest (Unit Testing)
-- In-memory storage (no database)
-
----
-
-##  Assumptions
-
-- Single user only
-- All data stored in memory
-- No authentication
-- PnL calculated using **Average Cost method**
-- Latest market prices are hardcoded inside `/pnl` endpoint
+* Node.js
+* Express
+* Jest (Unit Testing)
+* In-memory storage (no database)
 
 ---
 
-##  API Endpoints
+## Assumptions
 
-### 1️ Add Trade
+* Single user only
+* All data stored in memory
+* No authentication
+* PnL calculated using Average Cost method
+* Latest market prices are hardcoded inside `/pnl` endpoint
+
+---
+
+## API Endpoints
+
+### 1. Add Trade
 
 **POST** `/trades`
 
@@ -39,11 +38,11 @@ This implementation uses the **Average Cost method** for cost basis calculation.
   "price": 40000,
   "quantity": 1
 }
-````
+```
 
 ---
 
-### 2️ Get Portfolio
+### 2. Get Portfolio
 
 **GET** `/portfolio`
 
@@ -61,7 +60,7 @@ Returns current holdings per symbol:
 
 ---
 
-### 3️ Get PnL
+### 3. Get PnL
 
 **GET** `/pnl`
 
@@ -76,9 +75,9 @@ Returns:
 
 ---
 
-##  PnL Methodology
+## PnL Methodology
 
-This implementation uses the **Average Cost Method**:
+This implementation uses the Average Cost Method:
 
 * Average entry price is recalculated on each buy.
 * Realized PnL is computed on sell using current average cost.
@@ -86,7 +85,7 @@ This implementation uses the **Average Cost Method**:
 
 ---
 
-##  Running Tests
+## Running Tests
 
 Install dependencies:
 
@@ -102,7 +101,7 @@ npm test
 
 ---
 
-## ▶ Running the Service
+## Running the Service
 
 Start the server:
 
@@ -118,13 +117,13 @@ http://localhost:3000
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 src/
-  app.js              # App wiring
-  routes.js           # HTTP routes
-  portfolioEngine.js  # Core business logic
+  app.js
+  routes.js
+  portfolioEngine.js
 
 __tests__/
   portfolioEngine.test.js
